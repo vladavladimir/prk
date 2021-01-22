@@ -1,0 +1,57 @@
+# Don't show directory listings for URLs which map to a directory.
+Options -Indexes
+
+
+# Follow symbolic links in this directory.
+Options +SymLinksIfOwnerMatch
+
+
+# ##############################################################################
+# Replace html with your file extension, eg: php, htm, asp
+# ##############################################################################
+
+   ErrorDocument 404 /404.php
+
+   #Options +FollowSymLinks
+
+   <IfModule mod_headers.c>
+       Header set Access-Control-Allow-Origin "*"
+   </IfModule>
+
+   RewriteEngine on
+   
+###########################################
+# PAGES
+###########################################
+
+
+   RewriteRule ^$ /en/ [R=301]
+
+   RewriteRule ^ajax/search/$                                ./ajax/search.php [QSA,L]
+   RewriteRule ^ajax/increment/$                             ./ajax/increment.php [QSA,L]
+   RewriteRule ^ajax/live-search/$                           ./ajax/live-search.php [QSA,L]
+
+
+
+   RewriteRule ^en/$                                ./index.php?output_page=index&wlanguage=en [QSA,L]
+   RewriteRule ^fr/$                                ./index.php?output_page=index&wlanguage=fr [QSA,L]
+   RewriteRule ^ger/$                                ./index.php?output_page=index&wlanguage=ger [QSA,L]
+   RewriteRule ^ru/$                                ./index.php?output_page=index&wlanguage=ru [QSA,L]
+   RewriteRule ^es/$                                ./index.php?output_page=index&wlanguage=es [QSA,L]
+   RewriteRule ^it/$                                ./index.php?output_page=index&wlanguage=it [QSA,L]
+
+##########
+# 404
+##########
+
+   RewriteRule ^404/$                                /404.php?output_page=404&wlanguage=en [QSA,L]
+   RewriteRule ^([a-zA-Z]+)/404/$                   ./404.php?output_page=404&wlanguage=$1 [QSA,L]
+
+
+##########
+# Sign in / Sign Up
+##########
+
+
+
+# ##############################################################################
